@@ -18,7 +18,7 @@ import { AuthguardService } from './services/authguard.service';
 
 //Material İmports
 import { MatCardModule } from '@angular/material/card';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -40,7 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     //Material İmports
     MatCardModule,
-    MatFormField,
+    MatFormFieldModule,
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,

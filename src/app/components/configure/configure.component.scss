@@ -1,5 +1,18 @@
-.wrapper {
-    display: grid;
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.card-wrapper{
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    top: 25%;
+}
+
+mat-cardcontent{
+    display: inline-block;
 }
