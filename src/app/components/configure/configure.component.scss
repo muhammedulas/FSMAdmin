@@ -4,13 +4,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("../../../assets/background.jpg");
+    background-size: cover;
+    box-sizing: border-box;
 }
 
 .card-wrapper{
-    width: 50%;
+    width: 60%;
     height: 50%;
-    margin: 0 auto;
-    top: 25%;
+    position: absolute;
+    top: 35%;
 }
 
 mat-cardcontent{

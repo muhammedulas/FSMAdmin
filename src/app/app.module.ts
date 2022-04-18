@@ -1,8 +1,3 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-
-
 //Declarating imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +19,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AuthService } from './services/auth.service';
+import { EncryptionService } from './services/encryption.service';
+
+//Other Module Imports
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -38,6 +44,12 @@ import { MatSelectModule } from '@angular/material/select';
     WorkspacesComponent
   ],
   imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+
     //Material İmports
     MatCardModule,
     MatFormFieldModule,
@@ -46,15 +58,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule
-
-
+    MatCheckboxModule
   ],
-  providers: [AuthguardService],
+  providers: [AuthguardService, AuthService, EncryptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

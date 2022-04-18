@@ -3,7 +3,7 @@
     <mat-card>
       <mat-card-header>Bağlantı Ayarları</mat-card-header>
       <mat-card-content>
-        <mat-form-field aria-required="true">
+        <mat-form-field required="true">
           <label mat-label>Protokol</label>
           <mat-select required="true" [(value)]="config.protocol">
             <mat-option value="http">Http</mat-option>
@@ -18,7 +18,7 @@
         &nbsp;
         <mat-form-field>
           <label mat-label>Port</label>
-          <input matInput type="text" maxlength="5" autocomplete="off" [(ngModel)]="config.port">
+          <input matInput type="text" maxlength="5" autocomplete="off" required="true" [(ngModel)]="config.port">
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions align="end">

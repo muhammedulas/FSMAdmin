@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<div class="wrapper">
+  <div id="formContent">
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <!-- <img src="https://hisselog.com/assets/companies/logo-yazilim-sanayi-ve-ticaret-a-s-logo-thumb.png" id="icon"
+        alt="App Icon" /> -->
+      <img src="https://i.ibb.co/8498P47/logo-koyu-transparent-128x128.png" alt="App Icon">
+    </div>
+
+    <!-- Login Form -->
+    <ng-form #loginForm="ngForm">
+      <input type="text" autocomplete="off" id="login" class="fadeIn second" name="login" placeholder="Kullanıcı Adı"
+        [(ngModel)]="loginFormData.username" [ngModelOptions]="{standalone: true}">
+
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Parola"
+        [(ngModel)]="loginFormData.password" [ngModelOptions]=" {standalone: true}">
+
+      <button mat-raised-button (click)="login()" class="fadeIn fifth" id="loginButton">Giriş</button>
+      <br>
+
+      <mat-checkbox [(ngModel)]="loginFormData.rememberCredentials" [ngModelOptions]="{standalone: true}"
+        (change)="onChange()">Beni Hatırla</mat-checkbox>
+
+    </ng-form>
+
+    <!-- Configurations -->
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/configure">Bağlantı Ayarları</a>
+    </div>
+
+  </div>
+</div>
