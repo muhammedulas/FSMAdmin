@@ -23,10 +23,11 @@ export class AuthService {
 
     let body = `grant_type=password&username=${username}&password=${password}`
     let url = `${baseUrl}/api/auth/login`
-    let headers = new HttpHeaders().set("source", "management")
+    let headers = new HttpHeaders().set("source", "management").set("Content-Type", "text/plain")
 
     var req = this.http.post<CurrentSession>(url, body, { headers: headers }).subscribe({
       next: res => {
+        window.alert(res)
         console.log(res);
         this.sessionData = res;
         this.router.navigate(["/"])
