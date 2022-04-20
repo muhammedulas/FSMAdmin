@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
+import { NotifierService } from 'src/app/services/notifier.service';
 
 interface ILoginFormData {
   username: string;
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
     loginButtonActive: false,
     rememberCredentials: false
   }
-  constructor(private encryption: EncryptionService, private authService: AuthService) { }
+  constructor(private encryption: EncryptionService, private authService: AuthService, private notifier: NotifierService) { }
 
   ngOnInit() {
     if (localStorage.getItem("loginCredentials") != null) {
@@ -33,7 +34,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("submitted")
+    if (this.loginFormData.username == null || this.loginFormData.username == "") {
+      this.notifier.error_top_center("Kullanıcı adı boş bırakılamaz")
+      return
+    }
+
     this.authService.login(this.loginFormData.username, this.loginFormData.password)
   }
 

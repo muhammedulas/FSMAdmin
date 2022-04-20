@@ -10,10 +10,10 @@
     <!-- Login Form -->
     <ng-form #loginForm="ngForm">
       <input type="text" autocomplete="off" id="login" class="fadeIn second" name="login" placeholder="Kullanıcı Adı"
-        [(ngModel)]="loginFormData.username" [ngModelOptions]="{standalone: true}">
+        [(ngModel)]="loginFormData.username" [ngModelOptions]="{standalone: true}" (keyup.enter)="login()">
 
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="Parola"
-        [(ngModel)]="loginFormData.password" [ngModelOptions]=" {standalone: true}">
+        [(ngModel)]="loginFormData.password" [ngModelOptions]=" {standalone: true}" (keyup.enter)="login()">
 
       <button mat-raised-button (click)="login()" class="fadeIn fifth" id="loginButton">Giriş</button>
       <br>
