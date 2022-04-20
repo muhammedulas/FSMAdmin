@@ -1,5 +1,4 @@
 //Declarating imports
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './components/main/main.component';
@@ -16,6 +15,7 @@ import { AuthguardService } from './services/authguard.service';
 import { AuthService } from './services/auth.service';
 import { EncryptionService } from './services/encryption.service';
 
+
 //Material İmports
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,14 +28,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+
 
 
 //Other Module Imports
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 
 
 
@@ -72,10 +78,12 @@ import { ToastrModule } from 'ngx-toastr';
     MatCheckboxModule,
     MatIconModule,
     MatTooltipModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule,
+    MatTableModule
 
   ],
-  providers: [AuthguardService, AuthService, EncryptionService],
+  providers: [AuthguardService, AuthService, EncryptionService, { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
