@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <mat-icon svgIcon="fsm_logo" id="logo"></mat-icon>
+  <b>FSM Yönetim Paneli</b>
+
+  <a mat-button *ngFor="let route of routeList" [routerLink]="route.path" routerLinkActive="active">{{route.title}}</a>
+
+  <div class="spacer"></div>
+  <button mat-icon-button matTooltip="Çıkış" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,17 @@
+.main-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 90%;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    app-navbar {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .route {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+}

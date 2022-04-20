@@ -9,7 +9,12 @@ import { DevicesComponent } from './components/main/devices/devices.component';
 import { SessionsComponent } from './components/main/sessions/sessions.component';
 import { UsersComponent } from './components/main/users/users.component';
 import { WorkspacesComponent } from './components/main/workspaces/workspaces.component';
+import { NavbarComponent } from './components/common/navbar/navbar.component';
+import { FooterComponent } from './components/common/footer/footer.component';
+
 import { AuthguardService } from './services/authguard.service';
+import { AuthService } from './services/auth.service';
+import { EncryptionService } from './services/encryption.service';
 
 //Material İmports
 import { MatCardModule } from '@angular/material/card';
@@ -20,14 +25,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AuthService } from './services/auth.service';
-import { EncryptionService } from './services/encryption.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+
 
 //Other Module Imports
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -36,6 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginComponent,
     ConfigureComponent,
+    NavbarComponent,
+    FooterComponent,
 
     MainComponent,
     DevicesComponent,
@@ -49,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot({ maxOpened: 3, autoDismiss: true, preventDuplicates: true, resetTimeoutOnDuplicate: true, includeTitleDuplicates: true }),
 
     //Material İmports
     MatCardModule,
@@ -58,7 +69,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatListModule
+
   ],
   providers: [AuthguardService, AuthService, EncryptionService],
   bootstrap: [AppComponent]
