@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Config } from 'src/app/models/Config';
-import { AuthService } from 'src/app/services/auth.service';
+import { NotifierService } from 'src/app/services/notifier.service';
 
 
 
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 
 export class ConfigureComponent implements OnInit {
-  constructor(private service: AuthService) { }
+  constructor(private notifier: NotifierService) { }
   public config: Config = {
     protocol: '',
     url: '',
@@ -20,17 +20,18 @@ export class ConfigureComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("config") != null) {
-      this.config = JSON.parse(localStorage.getItem("config")!)
+      this.config = JSON.parse(localStorage.getItem("config")!);
     }
   }
 
   setConfigurations() {
-    localStorage.setItem("config", JSON.stringify(this.config))
+    localStorage.setItem("config", JSON.stringify(this.config));
+    this.notifier.success_top_center("Ayarlar Kaydedildi", 1.5);
   }
 
   getConfigurations() {
     var config = localStorage.getItem("config");
-    this.config = JSON.parse(config!)
+    this.config = JSON.parse(config!);
     return config;
   }
 

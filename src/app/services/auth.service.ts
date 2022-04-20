@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Config } from '../models/Config';
 import { HttpHeaders } from '@angular/common/http';
 import { GlobalService } from './global.service';
+import { NotifierService } from './notifier.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class AuthService {
   public loggedIn = new Subject<boolean>()
 
 
-  constructor(private router: Router, private http: HttpClient, private global: GlobalService) { this.loggedIn.next(false) }
+  constructor(private router: Router,
+    private http: HttpClient,
+    private global: GlobalService,
+    private notifier: NotifierService
+  ) { this.loggedIn.next(false) }
 
   login(username: string, password: string) {
     let baseUrl = this.global.getBaseUrl();
@@ -28,11 +33,12 @@ export class AuthService {
     var req = this.http.post<CurrentSession>(url, body, { headers: headers }).subscribe({
       next: res => {
         this.sessionData = res;
+        this.notifier.success_top_center("Giriş başarılı");
         this.loggedIn.next(true);
         this.router.navigate(["/"]);
       },
       error: err => {
-        window.alert(err.error.error_description)
+        this.notifier.error_top_center(err.error.error_description)
         console.log(err)
       },
       complete: () => {
@@ -42,23 +48,32 @@ export class AuthService {
   }
 
   logout() {
-    let url = `${this.global.getBaseUrl()}/api/auth/logout`
-    let headers = new HttpHeaders().set("Authorization", `Bearer ${this.sessionData.access_token}`).set("Accept", "application/json")
-    var req = this.http.get(url, { headers: headers }).subscribe({
-      next: () => {
-        this.sessionData = new CurrentSession();
-        this.loggedIn.next(false);
-        return true;
-      },
-      error: err => {
-        console.log(err);
-        window.alert(err.description);
-        return false;
-      },
-      complete: () => {
-        req.unsubscribe();
-      }
-    })
+    this.sessionData = new CurrentSession();
+    this.loggedIn.next(false);
+    return true
+
+
+    /*     let url = `${this.global.getBaseUrl()}/api/auth/logout`
+        let headers = new HttpHeaders().set("Authorization", `Bearer ${this.sessionData.access_token}`).set("Accept", "application/json")
+        var req = this.http.get(url, { headers: headers }).subscribe({
+          next: () => {
+            this.sessionData = new CurrentSession();
+            this.loggedIn.next(false);
+            return true;
+          },
+          error: err => {
+            console.log(err);
+            this.notifier.error_top_center(err.description)
+            return false;
+          },
+          complete: () => {
+            req.unsubscribe();
+          }
+        }) */
+  }
+
+  loginStateAsObservable() {
+    return this.loggedIn.asObservable();
   }
 
 }
