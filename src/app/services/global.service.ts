@@ -6,6 +6,24 @@ import { Config } from '../models/Config';
 })
 export class GlobalService {
 
+  public routeList = [{
+    title: "Kullanıcılar",
+    path: "/users",
+    icon: ""
+  }, {
+    title: "Çalışma Alanları",
+    path: "/workspaces",
+    icon: ""
+  }, {
+    title: "Cihazlar",
+    path: "/devices",
+    icon: ""
+  }, {
+    title: "Oturumlar",
+    path: "/sessions",
+    icon: ""
+  }]
+
   constructor() { }
 
   getBaseUrl() {
@@ -13,5 +31,5 @@ export class GlobalService {
     return `${config.protocol}://${config.url}:${config.port}`
   }
 
-  
+
 }
