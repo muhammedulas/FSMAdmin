@@ -21,7 +21,24 @@ export class AuthService {
     private http: HttpClient,
     private global: GlobalService,
     private notifier: NotifierService
-  ) { this.loggedIn.next(false) }
+  ) {
+    this.loggedIn.next(false)
+    this.sessionData = JSON.parse(localStorage.getItem("session")!)
+  }
+
+
+  getBaseUrl() {
+    let config: Config = JSON.parse(localStorage.getItem("config")!)
+    return `${config.protocol}://${config.url}:${config.port}`
+  }
+
+  getGlobalHeader() {
+    return new HttpHeaders()
+      .set("Accept", "application/json")
+      .set("Authorization", `Bearer ${this.sessionData.access_token}`)
+      .set("source", "management");
+  }
+
 
   login(username: string, password: string) {
     let baseUrl = this.global.getBaseUrl();
@@ -33,6 +50,7 @@ export class AuthService {
     var req = this.http.post<CurrentSession>(url, body, { headers: headers }).subscribe({
       next: res => {
         this.sessionData = res;
+        localStorage.setItem("session", JSON.stringify(res))
         this.notifier.success_top_center("Giriş başarılı");
         this.loggedIn.next(true);
         this.router.navigate(["/"]);
