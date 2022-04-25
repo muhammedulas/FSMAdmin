@@ -1,3 +1,217 @@
-<p>
-  devices works!
-</p>
+<div class="container">
+  <div class="tab-wrapper">
+    <mat-tab-group mat-stretch-tabs (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Yetkilendirildi">
+
+
+        <div class="Allowed">
+          <div class="actions">
+            <button mat-icon-button matTooltip="Test" color="accent" class="action-button"
+              [disabled]="allowed.selection.selected.length < 1" (click)="test()">
+              <mat-icon>phonelink_erase</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Cihazı Kaldır" color="accent" class="action-button"
+              [disabled]="allowed.selection.selected.length < 1">
+              <mat-icon>phonelink_erase</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button" (click)="block('allowed')"
+              [disabled]="allowed.selection.selected.length < 1">
+              <mat-icon>app_blocking</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+          <table mat-table [dataSource]="allowed.dataSource!">
+
+            <ng-container matColumnDef="Select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggleAllowed() : null"
+                  [checked]="allowed.selection.hasValue() && isAllSelectedOfAllowed()"
+                  [indeterminate]="allowed.selection.hasValue() && !isAllSelectedOfAllowed()"
+                  [aria-label]="checkboxLabelAllowed()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? allowed.selection.toggle(row) : null" [checked]="allowed.selection.isSelected(row)"
+                  [aria-label]="checkboxLabelAllowed(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let device"> {{device.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Number">
+              <th mat-header-cell *matHeaderCellDef> Numara </th>
+              <td mat-cell *matCellDef="let device"> {{device.nr}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Definition">
+              <th mat-header-cell *matHeaderCellDef> Açıklama </th>
+              <td mat-cell *matCellDef="let device"> {{device.definition}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DeviceID">
+              <th mat-header-cell *matHeaderCellDef> Cihaz Kimliği</th>
+              <td mat-cell *matCellDef="let device"> {{device.deviceID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="AllowedBy">
+              <th mat-header-cell *matHeaderCellDef> Yetkilendiren </th>
+              <td mat-cell *matCellDef="let device" [matTooltip]="getUserTooltip(device.AllowedUser)"
+                matTooltipClass="multiline-tooltip"> {{device.AllowedUser.userName}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="allowed.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: allowed.displayedColumns;"
+              (click)="allowed.selection.toggle(row)"></tr>
+
+          </table>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Yetkilendirme Bekliyor">
+
+        <div class="Pending">
+          <div class="actions">
+            <button mat-icon-button matTooltip="Onayla" color="primary" class="action-button" (click)="allow('pending')"
+              [disabled]="pending.selection.selected.length < 1">
+              <mat-icon>security_update_good</mat-icon>
+            </button>
+
+            <button mat-icon-button matTooltip="Reddet" color="accent" class="action-button"
+              [disabled]="pending.selection.selected.length < 1">
+              <mat-icon>phonelink_erase</mat-icon>
+            </button>
+
+            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button" (click)="block('pending')"
+              [disabled]="pending.selection.selected.length < 1">
+              <mat-icon>app_blocking</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+          <table mat-table [dataSource]="pending.dataSource">
+
+            <ng-container matColumnDef="Select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterTogglePending() : null"
+                  [checked]="pending.selection.hasValue() && isAllSelectedOfPending()"
+                  [indeterminate]="pending.selection.hasValue() && !isAllSelectedOfPending()"
+                  [aria-label]="checkboxLabelPending()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? pending.selection.toggle(row) : null" [checked]="pending.selection.isSelected(row)"
+                  [aria-label]="checkboxLabelPending(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let device"> {{device.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="RequestDate">
+              <th mat-header-cell *matHeaderCellDef> İstek Tarihi </th>
+              <td mat-cell *matCellDef="let device"> {{device.requestDate}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Message">
+              <th mat-header-cell *matHeaderCellDef> Açıklama </th>
+              <td mat-cell *matCellDef="let device"> {{device.definition}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DeviceID">
+              <th mat-header-cell *matHeaderCellDef> Cihaz Kimliği</th>
+              <td mat-cell *matCellDef="let device"> {{device.deviceID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="RequestedBy">
+              <th mat-header-cell *matHeaderCellDef> İstek Sahibi </th>
+              <td mat-cell *matCellDef="let device" [matTooltip]="getUserTooltip(device.Requester)"
+                matTooltipClass="multiline-tooltip"> {{device.Requester.userName}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="pending.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: pending.displayedColumns" (click)="pending.selection.toggle(row)">
+            </tr>
+
+          </table>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Engellendi">
+
+        <div class="Blocked">
+          <div class="actions">
+
+            <button mat-icon-button matTooltip="Giriş İzni Ver" color="primary" class="action-button"
+              (click)="allow('blocked')" [disabled]="blocked.selection.selected.length < 1">
+              <mat-icon>security_update_good</mat-icon>
+            </button>
+
+            <button mat-icon-button matTooltip="Engeli Kaldır" class="action-button"
+              [disabled]="blocked.selection.selected.length < 1">
+              <mat-icon>smartphone</mat-icon>
+            </button>
+
+          </div>
+          <mat-divider></mat-divider>
+          <table mat-table [dataSource]="blocked.dataSource">
+
+            <ng-container matColumnDef="Select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggleBlocked() : null"
+                  [checked]="blocked.selection.hasValue() && isAllSelectedOfBlocked()"
+                  [indeterminate]="blocked.selection.hasValue() && !isAllSelectedOfBlocked()"
+                  [aria-label]="checkboxLabelBlocked()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? blocked.selection.toggle(row) : null" [checked]="blocked.selection.isSelected(row)"
+                  [aria-label]="checkboxLabelBlocked(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let device"> {{device.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Definition">
+              <th mat-header-cell *matHeaderCellDef> Açıklama </th>
+              <td mat-cell *matCellDef="let device"> {{device.definition}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DeviceID">
+              <th mat-header-cell *matHeaderCellDef> Cihaz Kimliği</th>
+              <td mat-cell *matCellDef="let device"> {{device.deviceID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="BlockedBy">
+              <th mat-header-cell *matHeaderCellDef> Engelleyen </th>
+              <td mat-cell *matCellDef="let device" [matTooltip]="getUserTooltip(device.BlockedUser)"
+                matTooltipClass="multiline-tooltip"> {{device.BlockedUser.userName}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="blocked.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: blocked.displayedColumns" (click)="blocked.selection.toggle(row)">
+            </tr>
+
+          </table>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

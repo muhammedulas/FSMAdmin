@@ -1,0 +1,137 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+//Table customization
+
+//General
+th.mat-header-cell {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+//For Allowed Tab
+.Allowed{
+    margin-top: 20px;
+    table {
+        width: 100%;
+
+        .mat-column-ID {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-Number {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-Definition {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-DeviceID {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-AllowedBy {
+            flex: none;
+            width: 20%;
+        }
+        .mat-row:hover {
+            background-color: rgb(226, 226, 226);
+        }
+        .selected {
+            background-color: rgb(190, 190, 190);
+        }
+    }
+}
+
+//For Pending Tab
+.Pending{
+    margin-top: 20px;
+    table {
+        width: 100%;
+        
+        .mat-column-ID {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-RequestDate {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-Message {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-DeviceID {
+            flex: none;
+            width: 20%;
+        }
+        .mat-column-Requester {
+            flex: none;
+            width: 20%;
+        }
+        .mat-row:hover {
+            background-color: rgb(226, 226, 226);
+        }
+        .selected {
+            background-color: rgb(190, 190, 190);
+        }
+    }
+}
+
+
+//For Blocked Tab
+.Blocked{
+    margin-top: 20px;
+    table {
+        width: 100%;
+        
+        .mat-column-ID {
+            flex: none;
+            width: 25%;
+        }
+        .mat-column-Definition {
+            flex: none;
+            width: 25%;
+        }
+        .mat-column-DeviceID {
+            flex: none;
+            width: 25%;
+        }
+        .mat-column-BlockedBy {
+            flex: none;
+            width: 25%;
+        }
+        .mat-row:hover {
+            background-color: rgb(226, 226, 226);
+        }
+        .selected {
+            background-color: rgb(190, 190, 190);
+        }
+    }
+}
+
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 20px;
+    box-sizing: border-box;
+
+    .action-button {
+        margin-right: 20px;
+
+        mat-icon {
+            font-size: 35px;
+        }
+    }
+}

@@ -5,7 +5,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 
     /** Determines if this route (and its subtree) should be detached to be reused later */
     public shouldDetach(route: ActivatedRouteSnapshot): boolean {
-        console.log(route)
+
         if (route.url.length > 0) {
             if (route.url[0].path! == "login" || route.url[0].path! == "configure") {
                 console.log("Route will not be reused")

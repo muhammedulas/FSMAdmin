@@ -360,3 +360,7 @@ template {
 .spacer {
     flex: 1 1 auto;
 }
+
+.multiline-tooltip{
+    white-space: pre-line;
+}
