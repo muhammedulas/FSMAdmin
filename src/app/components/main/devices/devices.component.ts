@@ -335,8 +335,41 @@ export class DevicesComponent implements OnInit {
 
   }
 
-  deny() {
+  async deny() {
+    let failed: { device: AuthPendingDevice, reason: string }[] = [];
+    let success: AuthPendingDevice[] = [];
+    let len = this.pending.selection.selected.length;
 
+    for (let i = 0; i < this.pending.selection.selected.length; i++) {
+      let device = this.pending.selection.selected[i];
+      let result = false;
+      console.log(`Request ${i + 1} sent`)
+      let req = await firstValueFrom(this.service.deny(device.id)).then(res => {
+        success.push(device);
+        console.log(res);
+      }).catch(err => {
+        failed.push({ device: device, reason: err.error.description });
+        console.log(err);
+      }).finally(() => {
+        console.log(`Request ${i + 1} completed`);
+        this.pending.dataSource = this.pending.dataSource.filter(dev => !success.includes(dev));
+      })
+    }
+    this.pending.selection.selected.forEach(dev => {
+      this.pending.selection.deselect(dev);
+    })
+
+    //Notify
+    if (failed.length == 0) {
+      this.notifier.success_top_center("Seçili İzin Talepleri Reddedildi");
+    }
+    else {
+      this.notifier.show_top_center(`Seçilen ${len} adet talebin ${success.length} tanesi reddedildi.`);
+      let message = "";
+      failed.forEach(q => message += `${q.device.id},`)
+      message += "id'li cihazlar engellenemedi"
+      this.notifier.error_top_center(message)
+    }
   }
 
   async disallow() {
