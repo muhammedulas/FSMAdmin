@@ -84,7 +84,7 @@
               <mat-icon>phonelink_erase</mat-icon>
             </button>
 
-            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button"
+            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button" (click)="unblock()"
               (click)="blockPendingDevices()" [disabled]="pending.selection.selected.length < 1">
               <mat-icon>app_blocking</mat-icon>
             </button>

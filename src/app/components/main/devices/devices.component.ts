@@ -287,8 +287,41 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  unblock() {
-    
+  async unblock() {
+    let failed: { device: BlockedDevice, reason: string }[] = [];
+    let success: BlockedDevice[] = [];
+    let len = this.blocked.selection.selected.length;
+
+    for (let i = 0; i < this.blocked.selection.selected.length; i++) {
+      let device = this.blocked.selection.selected[i];
+      let result = false;
+      console.log(`Request ${i + 1} sent`)
+      let req = await firstValueFrom(this.service.unblock(device.id)).then(res => {
+        success.push(device);
+        console.log(res);
+      }).catch(err => {
+        failed.push({ device: device, reason: err.error.description });
+        console.log(err);
+      }).finally(() => {
+        console.log(`Request ${i + 1} completed`);
+        this.blocked.dataSource = this.blocked.dataSource.filter(dev => !success.includes(dev));
+      })
+    }
+    this.blocked.selection.selected.forEach(dev => {
+      this.blocked.selection.deselect(dev);
+    })
+
+    //Notify
+    if (failed.length == 0) {
+      this.notifier.success_top_center("Seçili Cihazların engeli kaldırıldı");
+    }
+    else {
+      this.notifier.show_top_center(`Seçilen ${len} adet cihazdan ${success.length} tanesinin engeli kaldırıldı.`);
+      let message = "";
+      failed.forEach(q => message += `${q.device.id},`)
+      message += "id'li cihazlara giriş izni verilemedi"
+      this.notifier.error_top_center(message)
+    }
   }
 
   async allowPendingDevices() {
