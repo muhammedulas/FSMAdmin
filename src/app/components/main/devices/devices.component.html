@@ -75,7 +75,7 @@
         <div class="Pending">
           <div class="actions">
             <button mat-icon-button matTooltip="Onayla" color="primary" class="action-button"
-              [disabled]="pending.selection.selected.length < 1">
+              (click)="allowPendingDevices()" [disabled]="pending.selection.selected.length < 1">
               <mat-icon>security_update_good</mat-icon>
             </button>
 
