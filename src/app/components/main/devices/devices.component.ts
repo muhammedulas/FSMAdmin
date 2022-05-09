@@ -254,11 +254,41 @@ export class DevicesComponent implements OnInit {
 
 
   blockPendingDevices() {
+    let failed: { device: AuthPendingDevice, reason: string }[] = [];
+    let success: AuthPendingDevice[] = [];
+    let len = this.pending.selection.selected.length;
 
+    for (let i = 0; i < len; i++) {
+      let device = this.pending.selection.selected[i];
+
+      let req = this.service.block(device.id, "authPending").subscribe({
+        next: res => {
+          success.push(device);
+        },
+        error: (err) => {
+          failed.push({ device: device, reason: err.error.description });
+        },
+        complete: () => {
+          req.unsubscribe();
+          success.forEach(dev => this.pending.selection.deselect(dev));
+          this.pending.dataSource = this.pending.dataSource.filter(q => !success.includes(q));
+        }
+      })
+    }
+    if (failed.length == 0) {
+      this.notifier.success_top_center("Seçili Cihazlar Engellendi");
+    }
+    else {
+      this.notifier.show_top_center(`Seçilen ${len} adet cihazdan ${success.length} tanesi engellendi.`);
+      let message = "";
+      failed.forEach(q => message += `${q.device.id},`)
+      message += "id'li cihazlar engellenemedi"
+      this.notifier.error_top_center(message)
+    }
   }
 
   unblock() {
-
+    
   }
 
   allowPendingDevices() {
