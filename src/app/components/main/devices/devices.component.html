@@ -6,16 +6,12 @@
 
         <div class="Allowed">
           <div class="actions">
-            <button mat-icon-button matTooltip="Test" color="accent" class="action-button"
-              [disabled]="allowed.selection.selected.length < 1" (click)="test()">
-              <mat-icon>phonelink_erase</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="Cihazı Kaldır" color="accent" class="action-button"
+            <button mat-icon-button matTooltip="Cihazı Kaldır" color="accent" class="action-button" (click)="disallow()"
               [disabled]="allowed.selection.selected.length < 1">
               <mat-icon>phonelink_erase</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button" (click)="block('allowed')"
-              [disabled]="allowed.selection.selected.length < 1">
+            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button"
+              (click)="blockAllowedDevices()" [disabled]="allowed.selection.selected.length < 1">
               <mat-icon>app_blocking</mat-icon>
             </button>
           </div>
@@ -78,7 +74,7 @@
 
         <div class="Pending">
           <div class="actions">
-            <button mat-icon-button matTooltip="Onayla" color="primary" class="action-button" (click)="allow('pending')"
+            <button mat-icon-button matTooltip="Onayla" color="primary" class="action-button"
               [disabled]="pending.selection.selected.length < 1">
               <mat-icon>security_update_good</mat-icon>
             </button>
@@ -88,7 +84,7 @@
               <mat-icon>phonelink_erase</mat-icon>
             </button>
 
-            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button" (click)="block('pending')"
+            <button mat-icon-button matTooltip="Engelle" color="warn" class="action-button"
               [disabled]="pending.selection.selected.length < 1">
               <mat-icon>app_blocking</mat-icon>
             </button>
@@ -153,11 +149,11 @@
           <div class="actions">
 
             <button mat-icon-button matTooltip="Giriş İzni Ver" color="primary" class="action-button"
-              (click)="allow('blocked')" [disabled]="blocked.selection.selected.length < 1">
+              (click)="allowBlockedDevices()" [disabled]="blocked.selection.selected.length < 1">
               <mat-icon>security_update_good</mat-icon>
             </button>
 
-            <button mat-icon-button matTooltip="Engeli Kaldır" class="action-button"
+            <button mat-icon-button matTooltip="Engeli Kaldır" class="action-button" (click)="unblock()"
               [disabled]="blocked.selection.selected.length < 1">
               <mat-icon>smartphone</mat-icon>
             </button>

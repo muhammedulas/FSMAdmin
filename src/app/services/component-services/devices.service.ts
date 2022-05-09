@@ -13,39 +13,52 @@ export class DevicesService {
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   getAllowedDevices(explicitLoad: boolean = false) {
-    var url = `${this.auth.getBaseUrl()}/api/admin/devices/allowed?explicitLoad=${explicitLoad}`
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/allowed?explicitLoad=${explicitLoad}`;
     var headers = this.auth.getGlobalHeader()
 
-    return this.http.get<AllowedDevice[]>(url, { headers: headers })
+    return this.http.get<AllowedDevice[]>(url, { headers: headers });
   }
 
 
   getPendingDevices(explicitLoad: boolean = false) {
-    var url = `${this.auth.getBaseUrl()}/api/admin/devices/authPending?explicitLoad=${explicitLoad}`
-    var headers = this.auth.getGlobalHeader()
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/authPending?explicitLoad=${explicitLoad}`;
+    var headers = this.auth.getGlobalHeader();
 
-    return this.http.get<AuthPendingDevice[]>(url, { headers: headers })
+    return this.http.get<AuthPendingDevice[]>(url, { headers: headers });
   }
 
   getBlockedDevices(explicitLoad: boolean = false) {
-    var url = `${this.auth.getBaseUrl()}/api/admin/devices/blocked?explicitLoad=${explicitLoad}`
-    var headers = this.auth.getGlobalHeader()
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/blocked?explicitLoad=${explicitLoad}`;
+    var headers = this.auth.getGlobalHeader();
 
-    return this.http.get<BlockedDevice[]>(url, { headers: headers })
+    return this.http.get<BlockedDevice[]>(url, { headers: headers });
   }
 
 
-  allow(id: number, currentStatus: string) {
-    var url = `${this.auth.getBaseUrl()}/api/admin/devices/${currentStatus}/${id}/authorize`
+  allow(id: number, endpoint: string) {
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/${endpoint}/${id}/authorize`;
+    return this.http.get(url, { headers: this.auth.getGlobalHeader() });
+  }
 
-    return this.http.get(url, { headers: this.auth.getGlobalHeader() })
+  disallow(id: number) {
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/allowed/${id}/disallow`;
+    return this.http.get(url, { headers: this.auth.getGlobalHeader() });
+  }
+
+  deny(id: number) {
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/authPending/${id}/deny`;
+    return this.http.get(url, { headers: this.auth.getGlobalHeader() });
   }
 
 
-  block(id: number, currentStatus: string) {
-    var url = `${this.auth.getBaseUrl()}/api/admin/devices/${currentStatus}/${id}/block`
+  block(id: number, endpoint: string) {
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/${endpoint}/${id}/block`;
+    return this.http.get(url, { headers: this.auth.getGlobalHeader() });
+  }
 
-    return this.http.get(url, { headers: this.auth.getGlobalHeader() })
+  unblock(id: number) {
+    var url = `${this.auth.getBaseUrl()}/api/admin/devices/blocked/${id}/unblock`;
+    return this.http.get(url, { headers: this.auth.getGlobalHeader() });
   }
 
 
