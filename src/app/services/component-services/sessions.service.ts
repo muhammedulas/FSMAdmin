@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Session } from 'src/app/models/Session';
 import { AuthService } from '../auth.service';
 
 @Injectable()
@@ -9,12 +10,12 @@ export class SessionsService {
 
     getActiveSessions() {
         var url = `${this.auth.getBaseUrl()}/api/admin/sessions`;
-        return this.http.get(url, { headers: this.auth.getGlobalHeader() });
+        return this.http.get<Session[]>(url, { headers: this.auth.getGlobalHeader() });
     }
 
     getActiveSession(id: number) {
         var url = `${this.auth.getBaseUrl()}/api/admin/sessions/${id}`;
-        return this.http.get(url, { headers: this.auth.getGlobalHeader() });
+        return this.http.get<Session>(url, { headers: this.auth.getGlobalHeader() });
     }
 
     terminateSession(id: number) {
