@@ -43,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
+import { SessionsService } from './services/component-services/sessions.service';
 
 
 
@@ -85,7 +86,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
     MatDividerModule
 
   ],
-  providers: [AuthguardService, AuthService, EncryptionService, { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }],
+  providers: [AuthguardService, AuthService, EncryptionService, { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }, SessionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
