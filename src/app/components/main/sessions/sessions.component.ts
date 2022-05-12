@@ -91,14 +91,27 @@ export class SessionsComponent implements OnInit {
   }
 
   msToTime(ms: number) {
-    let seconds = parseInt((ms / 1000).toFixed(1));
+    let seconds = parseInt(Math.floor((ms / 1000)).toFixed(1));
     let minutes = parseInt((ms / (1000 * 60)).toFixed(1));
     let hours = parseInt((ms / (1000 * 60 * 60)).toFixed(1));
-    let days = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
-    if (seconds < 60) return seconds + " Saniye";
-    else if (minutes < 60) return minutes + " Dakika";
-    else if (hours < 24) return hours + " Saat";
-    else return days + " Gün"
+    let days = parseInt(((ms / (1000 * 60 * 60 * 24))).toFixed(1));
+
+    let _days = days;
+    let _hours = hours - (days * 24);
+    let _minutes = minutes - ((days * 24 * 60) + (hours - (days * 24)) * 60);
+    let _seconds = seconds - (_minutes * 60) - (_hours * 60 * 60) - (_days * 60 * 60 * 24);
+    let text = ``;
+    if (_days > 0) text += `${_days} gün `;
+    if (_hours > 0) text += `${_hours} saat `;
+    if (_minutes > 0) text += `${_minutes} dakika `;
+    if (_seconds < 0) _seconds += (_seconds * (-1))
+    text += `${_seconds} saniye`;
+
+    /*     if (seconds < 60) return seconds + " Saniye";
+        else if (minutes < 60) return minutes + " Dakika";
+        else if (hours < 24) return hours + " Saat";
+        else return days + " Gün" */
+    return text;
   }
 
 
