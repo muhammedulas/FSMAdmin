@@ -18,7 +18,7 @@ interface ISession {
 export class SessionsComponent implements OnInit {
   public sessions: ISession = {
     dataSource: [],
-    displayedColumns: ["Id", "StartedAt", "Time", "UserName", "WorkspaceTitle", "DeviceIdentifier", "Actions"],
+    displayedColumns: ["RowNr", "Id", "StartedAt", "Time", "UserName", "WorkspaceTitle", "DeviceIdentifier", "Actions"],
     selection: new SelectionModel<Session>()
   };
 

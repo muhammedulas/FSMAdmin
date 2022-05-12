@@ -16,6 +16,11 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="RowNr">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let session; index as i" style="font-weight: bold;">{{i + 1}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="Id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let session"> {{session.id}} </td>
@@ -52,7 +57,7 @@
     <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef> İşlem </th>
       <td mat-cell *matCellDef="let session">
-        <button mat-raised-button color="warn" (click)="terminateSession(session.id)">Oturumu Sonlandır</button>
+        <button mat-raised-button color="warn" (click)="terminateSession(session.id)">Sonlandır</button>
       </td>
     </ng-container>
 
