@@ -24,7 +24,9 @@ export class SessionsComponent implements OnInit {
 
   public date = Date.now();
 
-  constructor(private service: SessionsService, private notifier: NotifierService) { }
+  constructor(private service: SessionsService, private notifier: NotifierService) {
+    var updateDate = setInterval(() => { this.date = Date.now() }, 1000)
+  }
 
   ngOnInit() {
     this.getSessions();
@@ -113,7 +115,6 @@ export class SessionsComponent implements OnInit {
         else return days + " Gün" */
     return text;
   }
-
 
   getUserTooltip(data: Session) {
     return `Adı: ${data.name} 
