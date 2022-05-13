@@ -15,6 +15,8 @@ import { AuthguardService } from './services/authguard.service';
 import { AuthService } from './services/auth.service';
 import { EncryptionService } from './services/encryption.service';
 
+import { SearchUserPipe } from '../app/pipes/searchUser';
+
 
 //Material İmports
 import { MatCardModule } from '@angular/material/card';
@@ -31,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -59,7 +62,9 @@ import { SessionsService } from './services/component-services/sessions.service'
     DevicesComponent,
     SessionsComponent,
     UsersComponent,
-    WorkspacesComponent
+    WorkspacesComponent,
+
+    SearchUserPipe
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,8 @@ import { SessionsService } from './services/component-services/sessions.service'
     MatListModule,
     MatTabsModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule
 
   ],
   providers: [AuthguardService, AuthService, EncryptionService, { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }, SessionsService],

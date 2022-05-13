@@ -1,3 +1,125 @@
-<p>
-  users works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11 d-flex-justify-content-right">
+          Kullanıcılar
+        </div>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-accordion class="mt-2">
+        <mat-expansion-panel *ngFor="let user of users.dataSource| searchUser:searchString; let i = index" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{user.userName}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{user.name}} {{user.surName}}
+              <div class="spacer"></div>
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Kullanıcı Adı" autocomplete="off" [(ngModel)]="user.userName">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Adı" autocomplete="off" [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Soyadı" autocomplete="off" [(ngModel)]="user.surName">
+              </mat-form-field>
+            </div>
+            <div class="col-md-1 offset-md-2">
+              <div class="spacer"></div>
+              <div class="row">
+                <div class="col">
+                  <button mat-icon-button color="primary" matTooltip="Güncelle">
+                    <mat-icon>
+                      sync_alt
+                    </mat-icon>
+                  </button>
+                  <br>
+                  <button mat-icon-button color="warn" matTooltip="Sil" >
+                    <mat-icon>
+                      delete_outline
+                    </mat-icon>
+                  </button>
+                  <br>
+                  <button mat-icon-button color="accent" matTooltip="Parola belirle" >
+                    <mat-icon>
+                      password
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Ülke" autocomplete="off"
+                  [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Şehir" autocomplete="off" [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="E-Posta" autocomplete="off"
+                  [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="İlçe" autocomplete="off"
+                  [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input type="text" matInput placeholder="Posta Kodu" autocomplete="off"
+                  [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <input matInput type="text" matInput placeholder="Telefon" autocomplete="off"
+                  [(ngModel)]="user.name">
+              </mat-form-field>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row justify-content-start p-3">
+            <div class=" col-9 d-flex justify-content-start">
+              <mat-form-field [style.width.%]="100">
+                <textarea name="" matInput autocomplete="off" [(ngModel)]="user.name"
+                  placeholder="Açık Adres" id="" cols="30" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-card-actions class="mb-4">
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>
