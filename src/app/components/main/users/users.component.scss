@@ -1,6 +1,5 @@
 .container {
     width: 100%;
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -54,4 +53,10 @@ th.mat-header-cell {
 
 td {
     text-align: center;
+}
+
+.userContactInfo {
+    h4 {
+        text-align: center;
+    }
 }
