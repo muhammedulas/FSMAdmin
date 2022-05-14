@@ -47,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SessionsService } from './services/component-services/sessions.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -73,6 +74,7 @@ import { SessionsService } from './services/component-services/sessions.service'
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({ maxOpened: 3, autoDismiss: true, preventDuplicates: true, resetTimeoutOnDuplicate: true, includeTitleDuplicates: true }),
+    NgbModule,
 
     //Material İmports
     MatCardModule,
