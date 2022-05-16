@@ -14,10 +14,10 @@
 
           </mat-form-field>
           &nbsp;
-          <mat-form-field style="font-size: smaller; width: 35%;">
+          <mat-form-field>
             <mat-label>Rol</mat-label>
-            <mat-select>
-              <option #roleSelection matOption [value]="">Hepsi</option>
+            <mat-select #RoleSelection [(value)]="selectedRole">
+              <mat-option *ngFor="let role of roleList" [value]="role">{{role}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -26,8 +26,9 @@
       <mat-divider></mat-divider>
     </mat-card-title>
     <mat-card-content>
-      <mat-accordion class="mt-2">
-        <mat-expansion-panel *ngFor="let user of users.dataSource; let i = index">
+      <mat-accordion class=" mt-2">
+        <mat-expansion-panel
+          *ngFor="let user of users.dataSource | searchUser:searchString:selectedRole; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{user.userName}}
@@ -94,12 +95,20 @@
               <div class="row">
                 <h3 style="text-align: center;">Adresler</h3>
               </div>
+              <div class="row contact-actions">
+                <button mat-icon-button>
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                </button>
+              </div>
               <div class="row">
-                <mat-accordion>
+                <span *ngIf="user.adresses.length <= 0" class="warn">Kayıtlı Adres Yok</span>
+                <mat-accordion *ngFor="let address of user.adresses">
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                      <mat-panel-title>Title</mat-panel-title>
-                      <mat-panel-description>Description</mat-panel-description>
+                      <mat-panel-title>{{address.title}}</mat-panel-title>
+                      <mat-panel-description>{{address.city}}/{{address.country}}</mat-panel-description>
                     </mat-expansion-panel-header>
                   </mat-expansion-panel>
                 </mat-accordion>
@@ -109,10 +118,46 @@
               <div class="row">
                 <h3 style="text-align: center;">Telefon Numaraları</h3>
               </div>
+              <div class="row contact-actions">
+                <button mat-icon-button>
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="row">
+                <span *ngIf="user.phoneNumbers.length <= 0" class="warn">Kayıtlı Telefon Numarası Yok</span>
+                <mat-accordion *ngFor="let number of user.phoneNumbers">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{number.title}}</mat-panel-title>
+                      <mat-panel-description>Description</mat-panel-description>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
             </div>
             <div class="col-4">
               <div class="row">
                 <h3 style="text-align: center;">E-Posta Adresleri</h3>
+              </div>
+              <div class="row contact-actions">
+                <button mat-icon-button>
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="row">
+                <span *ngIf="user.mailAdresses.length <= 0" class="warn">Kayıtlı E-Posta Yok</span>
+                <mat-accordion *ngFor="let mail of user.mailAdresses">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{mail.title}}</mat-panel-title>
+                      <mat-panel-description>{{mail.mailAdress}}</mat-panel-description>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel>
+                </mat-accordion>
               </div>
             </div>
           </div>

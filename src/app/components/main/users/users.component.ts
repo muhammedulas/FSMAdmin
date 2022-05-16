@@ -21,6 +21,8 @@ export class UsersComponent implements OnInit {
     selection: new SelectionModel<User>()
   }
   public searchString: string = "";
+  public roleList = ["Hepsi", "Yönetici", "Kullanıcı"];
+  public selectedRole = "Hepsi";
   constructor(private service: UsersService, private notifier: NotifierService) { }
 
   ngOnInit() {
