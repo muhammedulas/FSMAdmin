@@ -1,3 +1,7 @@
+import { UserContactInfo_Adress } from "./UserContactInfo_Adress";
+import { UserContactInfo_Mail } from "./UserContactInfo_Mail";
+import { UserContactInfo_Phone } from "./UserContactInfo_Phone";
+
 export class User {
     id: number = 0;
     nr: number = 0;
@@ -15,4 +19,7 @@ export class User {
     authKey: string = "";
     ERPToken: string = "";
     loginLimit: number = 0;
+    mailAdresses: UserContactInfo_Mail[] = [];
+    phoneNumbers: UserContactInfo_Phone[] = [];
+    adresses: UserContactInfo_Adress[] = [];
 }
