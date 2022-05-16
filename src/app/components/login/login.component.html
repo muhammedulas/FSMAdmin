@@ -8,11 +8,12 @@
     </div>
 
     <!-- Login Form -->
-    <ng-form #loginForm="ngForm">
+    <form #loginForm="ngForm">
       <input type="text" autocomplete="off" id="login" class="fadeIn second" name="login" placeholder="Kullanıcı Adı"
-        [(ngModel)]="loginFormData.username" [ngModelOptions]="{standalone: true}" (keyup.enter)="login()">
+        autocomplete="off" [(ngModel)]="loginFormData.username" [ngModelOptions]="{standalone: true}"
+        (keyup.enter)="login()">
 
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Parola"
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Parola" autocomplete="off"
         [(ngModel)]="loginFormData.password" [ngModelOptions]=" {standalone: true}" (keyup.enter)="login()">
 
       <button mat-raised-button (click)="login()" class="fadeIn fifth" id="loginButton">Giriş</button>
@@ -21,7 +22,7 @@
       <mat-checkbox [(ngModel)]="loginFormData.rememberCredentials" [ngModelOptions]="{standalone: true}"
         (change)="onChange()">Beni Hatırla</mat-checkbox>
 
-    </ng-form>
+    </form>
 
     <!-- Configurations -->
     <div id="formFooter">
