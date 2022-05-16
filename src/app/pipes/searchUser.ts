@@ -6,8 +6,8 @@ import { User } from '../models/User';
 })
 export class SearchUserPipe implements PipeTransform {
 
-    transform(array: User[], searchString: string, admin: number = 3): User[] {
-        if (!array || !searchString) return array;
+    transform(array: User[], searchString: string, role: any): User[] {
+        if (!array || (!searchString && !role)) return array;
         else {
             let temp: User[] = [];
             temp = array.filter(user =>
@@ -15,11 +15,11 @@ export class SearchUserPipe implements PipeTransform {
                 user.name.toLocaleLowerCase().includes(searchString.toLocaleLowerCase()) ||
                 user.surName.toLocaleLowerCase().includes(searchString.toLocaleLowerCase())
             )
-            if (admin == 0) {
-                temp = temp.filter(user => user.isAdmin == 0)
-            }
-            else if (admin == 1) {
+            if (role == "Yönetici") {
                 temp = temp.filter(user => user.isAdmin == 1)
+            }
+            else if (role == "Kullanıcı") {
+                temp = temp.filter(user => user.isAdmin == 0)
             }
             return temp
         }
