@@ -41,13 +41,20 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SessionsService } from './services/component-services/sessions.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+//Dialogs
+import { ResetPasswordDialogComponent } from './components/main/users/dialogs/resetPasswordDialog/resetPasswordDialog.component';
+import { AdressDialogComponent } from './components/main/users/dialogs/adressDialog/adressDialog.component';
+import { MailAdressDialogComponent } from './components/main/users/dialogs/mailAdressDialog/mailAdressDialog.component';
+import { PhoneNumberDialogComponent } from './components/main/users/dialogs/phoneNumberDialog/phoneNumberDialog.component';
 
 
 
@@ -65,13 +72,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UsersComponent,
     WorkspacesComponent,
 
-    SearchUserPipe
+    SearchUserPipe,
+
+    //Dialogs
+    ResetPasswordDialogComponent,
+    AdressDialogComponent,
+    MailAdressDialogComponent,
+    PhoneNumberDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot({ maxOpened: 3, autoDismiss: true, preventDuplicates: true, resetTimeoutOnDuplicate: true, includeTitleDuplicates: true }),
     NgbModule,

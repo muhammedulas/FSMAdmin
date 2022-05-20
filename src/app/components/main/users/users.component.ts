@@ -1,8 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/component-services/users.service';
 import { NotifierService } from 'src/app/services/notifier.service';
+import { ResetPasswordDialogComponent } from './dialogs/resetPasswordDialog/resetPasswordDialog.component';
 
 interface IUsers {
   dataSource: User[];
@@ -23,7 +25,7 @@ export class UsersComponent implements OnInit {
   public searchString: string = "";
   public roleList = ["Hepsi", "Yönetici", "Kullanıcı"];
   public selectedRole = "Hepsi";
-  constructor(private service: UsersService, private notifier: NotifierService) { }
+  constructor(private service: UsersService, private notifier: NotifierService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getUsers();
@@ -42,6 +44,12 @@ export class UsersComponent implements OnInit {
         req.unsubscribe();
       }
     });
+  }
+
+  updatePassword(id: number) {
+    let dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
+      data: { id: id }
+    }).afterClosed();
   }
 
 }

@@ -47,17 +47,20 @@
           <div class="row justify-content-between">
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="Kullanıcı Adı" autocomplete="off" [(ngModel)]="user.userName">
+                <input type="text" matInput placeholder="Kullanıcı Adı" autocomplete="off" [(ngModel)]="user.userName"
+                  disabled="true">
               </mat-form-field>
             </div>
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="Adı" autocomplete="off" [(ngModel)]="user.name">
+                <input type="text" matInput placeholder="Adı" autocomplete="off" [(ngModel)]="user.name"
+                  disabled="true">
               </mat-form-field>
             </div>
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="Soyadı" autocomplete="off" [(ngModel)]="user.surName">
+                <input type="text" matInput placeholder="Soyadı" autocomplete="off" [(ngModel)]="user.surName"
+                  disabled="true">
               </mat-form-field>
             </div>
             <div class="col-md-1 offset-md-2">
@@ -76,7 +79,7 @@
                     </mat-icon>
                   </button>
                   <br>
-                  <button mat-icon-button color="accent" matTooltip="Parola belirle">
+                  <button mat-icon-button color="accent" matTooltip="Parola belirle" (click)="updatePassword(user.id)">
                     <mat-icon>
                       password
                     </mat-icon>
