@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
   updatePassword(id: number) {
     let dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
       data: { id: id }
-    }).afterClosed();
+    });
   }
 
 }

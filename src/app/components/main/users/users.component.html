@@ -73,9 +73,14 @@
                     </mat-icon>
                   </button>
                   <br>
-                  <button mat-icon-button color="warn" matTooltip="Girişi Yasakla">
+                  <button mat-icon-button color="warn" matTooltip="Girişi Engelle" *ngIf="user.blocked == 0">
                     <mat-icon>
                       block
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button matTooltip="Engeli Kaldır" *ngIf="user.blocked == 1">
+                    <mat-icon>
+                      how_to_reg
                     </mat-icon>
                   </button>
                   <br>
